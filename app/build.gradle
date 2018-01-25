@@ -22,7 +22,7 @@ apply plugin: 'org.greenrobot.greendao'
 
 greendao {
     //数据库的版本号
-    schemaVersion 13
+    schemaVersion 1
     /*
         生成DaoMaster、DaoSession、以及ModelDao的地址，建议设置
         com.martin.studygreendao:包名

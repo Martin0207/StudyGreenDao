@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UserModel model = new UserModel();
-                userId += 1;
                 model.setUserName("王小双" + userId);
+                userId += 1;
                 dao.insert(model);
             }
         });

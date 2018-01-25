@@ -11,8 +11,8 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class UserModel {
 
-    @Id
-    private long id;
+    @Id(autoincrement = true)
+    private Long id;
 
     private String userName;
 
@@ -38,8 +38,8 @@ public class UserModel {
 
     private float test6;
 
-    @Generated(hash = 1402900780)
-    public UserModel(long id, String userName, String gender, String age, int count,
+    @Generated(hash = 714199686)
+    public UserModel(Long id, String userName, String gender, String age, int count,
             boolean canUpdate, String test0, Boolean test1, Integer test2,
             int test3, int test4, double test5, float test6) {
         this.id = id;
@@ -61,11 +61,11 @@ public class UserModel {
     public UserModel() {
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -164,4 +164,5 @@ public class UserModel {
     public void setTest6(float test6) {
         this.test6 = test6;
     }
+
 }
