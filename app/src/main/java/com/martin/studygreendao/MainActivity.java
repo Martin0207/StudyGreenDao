@@ -19,10 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnUpdate;
     private Button btnSearch;
     private TextView tvContent;
-    private DaoSession daoSession;
 
     private int userId = 0;
-    private UserModelDao dao = MyApplication.getInstances().getDaoSession().getUserModelDao();
+    private UserModelDao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
 
-        daoSession = MyApplication.getInstances().getDaoSession();
         dao = MyApplication.getInstances().getDaoSession().getUserModelDao();
 
         btnAdd = findViewById(R.id.btn_add);
@@ -58,9 +56,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 List<UserModel> loadAll = dao.loadAll();
                 if (loadAll.size() > 0) {
-                    dao.deleteByKey(loadAll.get(0).getId());
-                    //根据Model对象删除
-                    dao.delete(loadAll.get(0));
+                    dao.deleteByKey(loadAll.get(0).getUId());
                 }
             }
         });
@@ -70,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 List<UserModel> loadAll = dao.loadAll();
                 if (loadAll.size() > 0) {
-                    long id = loadAll.get(0).getId();
+                    Long id = loadAll.get(0).getUId();
                     UserModel userModel = new UserModel();
-                    userModel.setId(id);
+                    userModel.setUId(id);
                     userModel.setUserName("改名叫 王双双");
                     dao.update(userModel);
                 }
@@ -82,13 +78,13 @@ public class MainActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<UserModel> list = daoSession.getUserModelDao().loadAll();
+                List<UserModel> list = dao.loadAll();
                 StringBuilder buffer = new StringBuilder();
                 buffer.append("开始查询数据\n");
                 for (int i = 0; i < list.size(); i++) {
                     UserModel model = list.get(i);
                     buffer.append("id = ")
-                            .append(model.getId())
+                            .append(model.getUId())
                             .append(" name = ")
                             .append(model.getUserName())
                             .append("\n");
